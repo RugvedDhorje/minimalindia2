@@ -8,7 +8,7 @@ export default function HomePage() {
   // Parallax effect: faster movement for the text content
   const textY = useTransform(scrollY, [0, 500], [0, -200]);
   return (
-    <div className="max-w-screen-2xl mx-auto relative min-h-screen h-full z-50">
+    <div className="w-full mx-auto relative min-h-screen h-full z-50 bg-gray-200">
       {/* Animation */}
 
       <div className="absolute inset-0 z-50 h-full w-full overflow-hidden">
@@ -22,12 +22,14 @@ export default function HomePage() {
       <div className="inset-0 min-h-screen overflow-y-auto">
         <div
           //   ref={bgRef}
-          className="relative w-full bg-gray-200 h-[140vh] bg-cover bg-center rounded-b-3xl mb-10 shadow-2xl"
+          className="relative w-full max-w-screen-2xl mx-auto bg-gray-200 h-[140vh] bg-cover bg-center rounded-b-3xl mb-10"
           // style={{
           //   backgroundImage: `url("/homeBg.jpg")`,
           // }}
         >
-          <Navbar />
+          <div className="w-full max-w-screen-2xl mx-auto flex justify-center">
+            <Navbar />
+          </div>
           {/* <Navbar /> */}
           <motion.div
             // ref={textRef}

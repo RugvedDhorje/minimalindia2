@@ -248,14 +248,17 @@
 //   );
 // }
 "use client";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { SetStateAction, useEffect, useRef, useState } from "react";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import Creative from "./Creative";
 
 export default function Service() {
   const circleRef = useRef(null);
   const innerCircleRef = useRef(null);
+  const [aboveDivOpacity, setAboveDivOpacity] = useState(1);
 
+  // Simulate a motion value for example
+  const motionValue = useSpring(0.5, { stiffness: 200 });
   // Scroll progress
   const { scrollYProgress } = useScroll();
 
@@ -264,7 +267,7 @@ export default function Service() {
   const innerCircleScale = useTransform(scrollYProgress, [0.42, 1], [1, 5]);
 
   // Opacity control for the "above div"
-  const aboveDivOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  // const aboveDivOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
   // Reveal Creative Div
   const creativeOpacity = useTransform(scrollYProgress, [0.5, 0.52], [0, 1]);
@@ -274,6 +277,16 @@ export default function Service() {
     [0.41, 0.55],
     ["50%", "100%"]
   );
+  useEffect(() => {
+    const unsubscribe = motionValue.on(
+      "change",
+      (latest: SetStateAction<number>) => {
+        setAboveDivOpacity(latest); // Update state with the numeric value
+      }
+    );
+
+    return () => unsubscribe(); // Cleanup on unmount
+  }, [motionValue]);
 
   return (
     <div className="relative">

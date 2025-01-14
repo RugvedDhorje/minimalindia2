@@ -1,5 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { NavigationMenuDemo } from "./NavigationButton";
+import { TypewriterEffectSmooth } from "./ui/TypewriterEffectSmoothDemo";
+// import { TypewriterEffectSmoothDemo } from "@/app/TypewritterEffect";
 
 export default function Creative() {
   const { scrollYProgress } = useScroll();
@@ -11,6 +13,28 @@ export default function Creative() {
   );
   const tiltAngle = useTransform(scrollYProgress, [0.25, 0.7], [-35, 10]);
   const tiltText = useTransform(scrollYProgress, [0.25, 0.7], [-50, -10]);
+  const words = [
+    {
+      className: "text-[80px]",
+      text: "Stories",
+    },
+    {
+      className: "text-[80px]",
+      text: "you'll",
+    },
+    {
+      className: "text-[80px]",
+      text: "want",
+    },
+    {
+      className: "text-[80px]",
+      text: "to",
+    },
+    {
+      text: "replay.",
+      className: "text-blue-500 text-[80px] dark:text-blue-500",
+    },
+  ];
 
   return (
     <div className="max-w-screen-2xl rounded-t-3xl w-full  mx-auto bg-transparent">
@@ -136,11 +160,13 @@ export default function Creative() {
         </motion.div>
         {/* Film making Section */}
         <div className="w-10/12 mx-auto bg-gray-200 rounded-3xl">
-          <div className="w-full pt-28">
-            <h1 className="text-[#292929] text-[80px] mx-auto leading-none font-bold mt-14 text-center">
+          <div className="w-full pt-36 flex flex-col justify-center items-center">
+            {/* <TypewriterEffectSmoothDemo /> */}
+            <TypewriterEffectSmooth words={words} />
+            {/* <h1 className="text-[#292929] text-[80px] mx-auto leading-none font-bold mt-14 text-center">
               Stories you’ll want to replay.
-            </h1>
-            <h2 className="text-[#292929] text-[40px] mx-auto leading-none text-center mt-5">
+            </h1> */}
+            <h2 className="text-[#292929] text-[40px] mx-auto leading-none">
               crafting moments, and leaving an impact.
             </h2>
           </div>
